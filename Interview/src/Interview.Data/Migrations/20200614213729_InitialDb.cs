@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Interview.Data.Migrations
 {
@@ -11,9 +13,10 @@ namespace Interview.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     EmailAddress = table.Column<string>(nullable: false),
-                    LinkToFile = table.Column<string>(nullable: true)
+                    LinkToFile = table.Column<string>(nullable: true),
+                    Expiration = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

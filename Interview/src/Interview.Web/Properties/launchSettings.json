@@ -12,8 +12,6 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "email_user": "david@dsergio.co",
-        "email_pass": "WTgG,P%s7+R&",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

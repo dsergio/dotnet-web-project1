@@ -37,13 +37,15 @@ namespace Interview.Api
                 services.AddDbContext<ApplicationDbContext>(options =>
                 options.EnableSensitiveDataLogging()
                        //.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-                       .UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                       //.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                       .UseMySql(Configuration.GetConnectionString("MySQLConnection")));
             }
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
                 options.EnableSensitiveDataLogging()
-                       .UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                       //.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                       .UseMySql(Configuration.GetConnectionString("MySQLConnection")));
 
             }
             
