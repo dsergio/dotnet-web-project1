@@ -1,0 +1,31 @@
+﻿@model Interview.Web.Api.ModelObject
+
+@{
+    ViewData["Title"] = "Upload";
+
+}
+
+<h1>Upload</h1>
+
+<h4>ModelObject</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" method="post" asp-action="Upload">
+            <dl>
+                <dt>
+                    <label>Upload File: </label>
+                </dt>
+                <dd>
+                    <input type="file" name="fileInput">
+                </dd>
+            </dl>
+            <input asp-page-handler="Upload" class="btn" type="submit" value="Upload" />
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
