@@ -25,6 +25,13 @@ namespace Interview.Web.Api
         {
             _httpClient = httpClient;
             _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
+
+            var apiUrl = System.Environment.GetEnvironmentVariable("ApiUrl");
+            if (apiUrl != null)
+            {
+                _baseUrl = apiUrl;
+            }
+            
         }
 
         private Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
