@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Interview.Business.Services.StorageServices;
 using Microsoft.AspNetCore.Http;
@@ -27,8 +28,46 @@ namespace Interview.Web.Controllers
             streamMem.Seek(0, SeekOrigin.Begin);
             (string urlPut, string urlGet, DateTime expiration) accessCredentials = await storageService.UploadStreamLimited(streamMem, fileInput.ContentType, fileInput);
 
-            return View();
+            //return View();
             //return Ok("email: " + emailAddress + " file: " + fileInput.FileName);
+
+            try
+            {
+                if (emailAddress != null)
+                {
+                    string senderAddress = "david@dsergio.co";
+                    string receiverAddress = emailAddress;
+                    string htmlBody = accessCredentials.urlGet;
+                    string textBody = accessCredentials.urlGet;
+
+                    MailMessage mail = new MailMessage();
+                    SmtpClient SmtpServer = new SmtpClient("mail.dsergio.co");
+
+                    mail.From = new MailAddress(senderAddress);
+                    mail.To.Add(receiverAddress);
+                    mail.Subject = "David Sergio Interview - You uploaded a file...";
+                    mail.Body = accessCredentials.urlGet;
+
+                    string? user = System.Environment.GetEnvironmentVariable("email_user");
+                    string? pass = System.Environment.GetEnvironmentVariable("email_pass");
+
+                    SmtpServer.Port = 587;
+                    SmtpServer.Credentials = new System.Net.NetworkCredential(user, pass);
+                    SmtpServer.EnableSsl = true;
+
+                    SmtpServer.Send(mail);
+                    Console.WriteLine("mail Send");
+
+                    mail.Dispose();
+                    SmtpServer.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return Ok("email: " + emailAddress + " file: " + fileInput.FileName);
         }
 
     }
