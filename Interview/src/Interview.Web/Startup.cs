@@ -30,7 +30,14 @@ namespace Interview.Web
             services.AddControllersWithViews();
             services.AddHttpClient("InterviewApi", options =>
             {
-                options.BaseAddress = new Uri(Configuration["ApiUrl"]);
+                //options.BaseAddress = new Uri(Configuration["ApiUrl"]);
+                var apiUrl = System.Environment.GetEnvironmentVariable("ApiUrl");
+                if (apiUrl != null) { 
+                    options.BaseAddress = new Uri(apiUrl);
+                } else
+                {
+                    options.BaseAddress = new Uri(Configuration["ApiUrl"]);
+                }
             });
         }
 
