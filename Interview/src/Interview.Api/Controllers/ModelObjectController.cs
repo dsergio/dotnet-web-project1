@@ -42,9 +42,7 @@ namespace Interview.Api.Controllers
                     await Service.UploadAsync(id, file);
                 }
 
-
-
-                return Ok("it works");
+                return Ok("tbd");
             }
 
         }
