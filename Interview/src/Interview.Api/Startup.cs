@@ -36,7 +36,8 @@ namespace Interview.Api
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
                 options.EnableSensitiveDataLogging()
-                       .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                       //.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                       .UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             }
             else
             {
