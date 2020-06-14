@@ -3,5 +3,82 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Interview Test Home</h1>
 
+<h4>Upload a file to AWS S3 with a Presigned URL</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <p>Use this form to process an email address, upload the file to AWS S3 using a Presigned URL with an expiration of 10 minutes (see Specifications below). 
+        </p>
+        <p>
+            I also developed an ASP.NET Core Web API (link TBD) that stores Email Address, Link, and Expiration via Entity Frameworks and Sqlite.
+            To use the Web API, use <a asp-controller="ModelObjects" asp-action="Index">ModelObjects</a>.
+        </p>
+
+        <form asp-controller="Home" enctype="multipart/form-data" method="post" asp-action="ProcessForm">
+
+            <div class="form-group">
+                <label class="control-label" >Email Address</label>
+                <input class="form-control input" placeholder="email@example.com" name="EmailAddress" data-val="true" data-val-required="Enter a valid email address." data-val-email="Enter a valid email address." />
+                <div class="field-validation-valid text-danger" data-valmsg-for="EmailAddress" data-valmsg-replace="true"></div>
+                <br />
+
+                <dl>
+                    <dt>
+                        <label>Upload File: </label>
+                    </dt>
+                    <dd>
+                        <input type="file" name="fileInput" data-val="true" data-val-required="Choose a file.">
+                        <div class="field-validation-valid text-danger" data-valmsg-for="fileInput" data-valmsg-replace="true"></div>
+                    </dd>
+                </dl>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Submit Form" class="button is-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<h4>About</h4>
+<div class="row">
+    <div class="col-md-12">
+        <br />
+        David Sergio
+        <ul>
+            <li>Link to Code: <a href="https://github.com/dsergio/interview-project">https://github.com/dsergio/interview-project</a></li>
+            <li>Link to Resume: <a href="https://dsergio.co/portfolio/site/ResumeDavidSergio_20200528.pdf">https://dsergio.co/portfolio/site/ResumeDavidSergio_20200528.pdf</a></li>
+        </ul>
+
+        <br />
+        Specifications:
+        <ul>
+            <li>
+                Create a single form that contains a file-upload and an email address input, both of which are required upon submit
+            </li>
+            <li>
+                Upload the file to S3
+            </li>
+            <li>
+                Create a link to the uploaded file so it can be shared with anyone (Presigned URL)
+            </li>
+            <li>
+                Email that link to the email address input
+            </li>
+            <li>
+                Written in .NET C#
+            </li>
+            <li>
+                The app must be hosted somewhere so we can access it and test it out
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -14,18 +14,19 @@
         <form enctype="multipart/form-data" method="post" asp-action="Upload">
             <dl>
                 <dt>
-                    <label>Upload File: </label>
+                    <label>Upload File for @Model.EmailAddress: </label>
                 </dt>
                 <dd>
-                    <input type="file" name="fileInput">
+                    <input type="file" name="fileInput" data-val="true" data-val-required="Choose a file.">
+                    <div class="field-validation-valid text-danger" data-valmsg-for="fileInput" data-valmsg-replace="true"></div>
                 </dd>
             </dl>
-            <input asp-page-handler="Upload" class="btn" type="submit" value="Upload" />
+            <br />
+            <input asp-page-handler="Upload" class="button is-primary" type="submit" value="Upload" />&nbsp;&nbsp;<a asp-action="Index" class="button is-info">Cancel</a>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
