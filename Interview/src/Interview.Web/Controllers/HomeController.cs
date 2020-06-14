@@ -67,7 +67,7 @@ namespace Interview.Web.Controllers
                 Console.WriteLine(ex.ToString());
             }
 
-            return Ok("email: " + emailAddress + " file: " + fileInput.FileName);
+            return Ok("You uploaded " + fileInput.FileName + " and sent a link to " + emailAddress + ". \n\n" + accessCredentials.urlGet + "\n\n" + "<a href='https://dsergio-interview.azurewebsites.net/'>Go Back</a>");
         }
 
     }
