@@ -1,15 +1,11 @@
 ﻿using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
-using Amazon.SimpleEmail;
-using Amazon.SimpleEmail.Model;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Interview.Business.Services.StorageServices
@@ -41,12 +37,17 @@ namespace Interview.Business.Services.StorageServices
         }
 
         /// <summary>
-        /// S3 Presigned URL Limited Access Upload Implementaion
+        /// S3 Presigned URL Limited Access Upload Implementaion. Defaults to 10 minute expiration.
         /// </summary>
         /// <param name="fileStream"></param>
-        /// <returns>(Presigned URL, expiration)</returns>
+        /// <returns>(urlPut, urlGet, expiration)</returns>
         public override async Task<(string, string, DateTime)> UploadStreamLimited(Stream fileStream, string contentType, IFormFile file)
         {
+            if (file is null)
+            {
+                throw new ArgumentNullException(nameof(file));
+            }
+
             string keyName = "" + Guid.NewGuid();
             (string urlPut, string urlGet, DateTime expiration) accessCredentials;
             accessCredentials = GeneratePreSignedURL(keyName, 10, contentType); // expires 10 minuntes from time of upload
@@ -87,6 +88,7 @@ namespace Interview.Business.Services.StorageServices
                 
             }
 
+            
         }
 
         /// <summary>
@@ -94,7 +96,7 @@ namespace Interview.Business.Services.StorageServices
         /// </summary>
         /// <param name="key"></param>
         /// <param name="expirationTimeMinutes"></param>
-        /// <returns>(Presigned URL, Expiration)</returns>
+        /// <returns>(urlPut, urlGet, Expiration)</returns>
         private (string, string, DateTime) GeneratePreSignedURL(string key, int expirationTimeMinutes, string contentType)
         {
             DateTime expiration = DateTime.Now.AddMinutes(expirationTimeMinutes);
@@ -121,7 +123,7 @@ namespace Interview.Business.Services.StorageServices
         }
 
         /// <summary>
-        /// S3 Public Access Upload Implementaion
+        /// S3 Public Access Upload Implementation. This method simply uploads a file to S3, without generating Presigned URL. 
         /// </summary>
         /// <param name="stream"></param>
         /// <returns>Public URL</returns>

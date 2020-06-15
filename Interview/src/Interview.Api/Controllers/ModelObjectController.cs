@@ -34,7 +34,7 @@ namespace Interview.Api.Controllers
                 {
                     await Service.UploadAsync(id, file);
                 }
-                return Ok("tbd");
+                return Ok();
             }
         }
 

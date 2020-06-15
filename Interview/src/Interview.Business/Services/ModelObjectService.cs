@@ -24,9 +24,7 @@ namespace Interview.Business.Services
             {
                 throw new ArgumentNullException(nameof(file));
             }
-            //var filePath = Path.GetTempFileName();
-            //FileStream stream = System.IO.File.Create(filePath);
-            //await file.CopyToAsync(stream);
+
             using Stream streamMem = new MemoryStream();
             file.CopyTo(streamMem);
             streamMem.Seek(0, SeekOrigin.Begin);
@@ -34,6 +32,7 @@ namespace Interview.Business.Services
             IStorageService storageService = new StorageServiceS3("ded20b31-0bf4-4d39-8d1f-9b8aba09cb38");
             string link = await storageService.UploadStreamPublic(streamMem);
 
+            
             storageService.GetClient().Dispose();
 
             return await UploadAsync(id, link, null);
@@ -75,13 +74,11 @@ namespace Interview.Business.Services
                     SmtpServer.EnableSsl = true;
 
                     SmtpServer.Send(mail);
-                    Console.WriteLine("mail Send");
-
                     mail.Dispose();
                     SmtpServer.Dispose();
                 }
             }
-            catch (Exception ex)
+            catch (SmtpException ex)
             {
                 Console.WriteLine(ex.ToString());
             }
