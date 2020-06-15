@@ -27,24 +27,15 @@ namespace Interview.Api.Controllers
             if (entity is null)
             {
                 return NotFound();
-
             }
             else
             {
-                // upload the file
-                // get the link
-                // update the service with the link text
-
                 if (file.Length > 0)
                 {
-
-
                     await Service.UploadAsync(id, file);
                 }
-
                 return Ok("tbd");
             }
-
         }
 
         [HttpPut("upload-link/{id}")]
@@ -57,17 +48,11 @@ namespace Interview.Api.Controllers
             if (entity is null)
             {
                 return NotFound();
-
             }
             else
             {
-                // upload the file
-                // get the link
-                // update the service with the link text
-
                 await Service.UploadAsync(id, link, expiration);
-                
-                return Ok("it works");
+                return Ok();
             }
 
         }

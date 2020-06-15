@@ -10,10 +10,12 @@
     <div class="col-md-4">
 
         <p>Use this form to process an email address, upload the file to AWS S3 using a Presigned URL with an expiration of 10 minutes (see Specifications below). 
+        The presigned link will be sent from david@dsergio.co.
+        The application may be slow, due to the App Service Level Subscription. The subscription determines response time, how many resources are available to the app, and the cost.
         </p>
         <p>
             I also developed an ASP.NET Core Web API (See <a href="https://dsergio-interview-api.azurewebsites.net/swagger">https://dsergio-interview-api.azurewebsites.net/swagger</a>) that stores Email Address, Link, and Expiration via Entity Frameworks and MySQL.
-            To use the Web API, use <a asp-controller="ModelObjects" asp-action="Index">ModelObjects</a>.
+            To use the Web API, go to <a asp-controller="ModelObjects" asp-action="Index">ModelObjects</a>.
         </p>
 
         <form asp-controller="Home" enctype="multipart/form-data" method="post" asp-action="ProcessForm">
@@ -46,13 +48,47 @@
 <div class="row">
     <div class="col-md-12">
         <br />
-        <h5>David Sergio</h5>
+
+        <h5>Application Design</h5>
         <ul>
-            <li>Link to Code: <a href="https://github.com/dsergio/interview-project">https://github.com/dsergio/interview-project</a></li>
+            <li>ASP.NET Core 3.1</li>
+            <li>Github Repository: <a href="https://github.com/dsergio/interview-project">https://github.com/dsergio/interview-project</a></li>
+            <li>Storage Interface and AWS S3 Implementation: <a href="https://github.com/dsergio/interview-project/tree/master/Interview/src/Interview.Business/Services/StorageServices">https://github.com/dsergio/interview-project/tree/master/Interview/src/Interview.Business/Services/StorageServices</a>
+                <ul>
+                    <li>I designed the storage services so that other implementations could be used, such as Azure Storage.</li>
+                </ul>
+            </li>
+            <li>
+                Environment Variables: Interview.Web
+                <ul>
+                    <li>email_pass</li>
+                    <li>email_user</li>
+                    <li>ApiUrl</li>
+                    <li>AWS_ACCESS_KEY_ID</li>
+                    <li>AWS_SECRET_KEY</li>
+                </ul>
+            <li>
+                Environment Variables: Interview.Api
+                <ul>
+                    <li>email_pass</li>
+                    <li>email_user</li>
+                </ul>
+            </li>
+            <li>
+                Azure Services:
+                <ul>
+                    <li>Azure Web App (Web)</li>
+                    <li>Azure Web App (Api)</li>
+                </ul>
+            </li>
+            <li>AWS Services: S3</li>
+            <li>Azure DevOps CI/CD</li>
+            <li>Entity Framework MySQL (externally hosted database)</li>
+            <li>SMTP Mailserver</li>
         </ul>
 
         <br />
-        Specifications:
+        <h5>Specifications</h5>
         <ul>
             <li>
                 Create a single form that contains a file-upload and an email address input, both of which are required upon submit

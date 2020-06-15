@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "ProcessForm";
+}
+
+<h1>Process Form Complete</h1>
+
+<p>
+    You uploaded <b>@ViewBag.fileName</b> to AWS S3 via a Presigned URL. 
+    The link was sent to <b>@ViewBag.emailAddress</b> from <b>david@dsergio.co</b>. 
+    The link expires at <b>@ViewBag.expiration</b>.
+</p>
+
+<p><a href="@ViewBag.url">@ViewBag.url</a></p>

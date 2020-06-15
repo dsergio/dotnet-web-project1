@@ -28,9 +28,6 @@ namespace Interview.Web.Controllers
             streamMem.Seek(0, SeekOrigin.Begin);
             (string urlPut, string urlGet, DateTime expiration) accessCredentials = await storageService.UploadStreamLimited(streamMem, fileInput.ContentType, fileInput);
 
-            //return View();
-            //return Ok("email: " + emailAddress + " file: " + fileInput.FileName);
-
             try
             {
                 if (emailAddress != null)
@@ -67,7 +64,12 @@ namespace Interview.Web.Controllers
                 Console.WriteLine(ex.ToString());
             }
 
-            return Ok("You uploaded " + fileInput.FileName + " and sent a link to " + emailAddress + ". \n\n" + accessCredentials.urlGet + "\n\n" + "<a href='https://dsergio-interview.azurewebsites.net/'>Go Back</a>");
+            ViewBag.fileName = fileInput.FileName;
+            ViewBag.emailAddress = emailAddress;
+            ViewBag.url = accessCredentials.urlGet;
+            ViewBag.expiration = accessCredentials.expiration;
+
+            return View();
         }
 
     }
