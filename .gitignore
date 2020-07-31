@@ -276,4 +276,4 @@ __pycache__/
 
 *.db
 *.sqlite
-/Interview/src/Interview.Web/package-lock.json
+/Project1/src/Project1.Web/package-lock.json

@@ -1,0 +1,32 @@
+﻿@model Project1.Web.Api.ModelObject
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ModelObject</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="control-label"></label>
+                <input asp-for="EmailAddress" class="form-control input" placeholder="email@example.com" name="EmailAddress" data-val="true" data-val-required="Enter a valid email address." data-val-email="Enter a valid email address." />
+                <div class="field-validation-valid text-danger" data-valmsg-for="EmailAddress" data-valmsg-replace="true"></div>
+            </div>
+            <br />
+            <div class="form-group">
+                <br />
+                <input type="submit" value="Save" class="button is-primary" />&nbsp;&nbsp;<a asp-action="Index" class="button is-info">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

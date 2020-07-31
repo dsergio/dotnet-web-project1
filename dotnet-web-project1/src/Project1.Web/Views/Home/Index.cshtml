@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h4>Upload a file to AWS S3 with a Presigned URL</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <p>
+            Use this form to process an email address, upload the file to AWS S3 using a Presigned URL with an expiration of 10 minutes (see Specifications below).
+            The presigned link will be sent from david@dsergio.co.
+            The application may be slow, due to the App Service Plan. The App Service Plan determines response time, how many resources are available to the app, and the cost.
+        </p>
+        <p>
+            I also developed an ASP.NET Core Web API that stores Email Address, Link, and Expiration via Entity Frameworks and MySQL.
+            To use the Web API, go to <a asp-controller="ModelObjects" asp-action="Index">ModelObjects</a>.
+        </p>
+
+        <form asp-controller="Home" enctype="multipart/form-data" method="post" asp-action="ProcessForm">
+
+            <div class="form-group">
+                <label class="control-label" >Email Address</label>
+                <input class="form-control input" placeholder="email@example.com" name="EmailAddress" data-val="true" data-val-required="Enter a valid email address." data-val-email="Enter a valid email address." />
+                <div class="field-validation-valid text-danger" data-valmsg-for="EmailAddress" data-valmsg-replace="true"></div>
+                <br />
+
+                <dl>
+                    <dt>
+                        <label>Upload File: </label>
+                    </dt>
+                    <dd>
+                        <input type="file" name="fileInput" data-val="true" data-val-required="Choose a file.">
+                        <div class="field-validation-valid text-danger" data-valmsg-for="fileInput" data-valmsg-replace="true"></div>
+                    </dd>
+                </dl>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Submit Form" class="button is-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<h4>About</h4>
+<div class="row">
+    <div class="col-md-12">
+        <br />
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
