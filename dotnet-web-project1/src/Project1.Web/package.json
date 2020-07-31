@@ -13,7 +13,7 @@
     "sass-loader": "^8.0.2",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
-    "jquery": "3.5.1",
+    "jquery": "3.5.0",
     "jquery-validation": "1.17.0",
     "jquery-validation-unobtrusive": "3.2.6"
   },
